@@ -33,4 +33,4 @@ def make_gate(gate_type: str) -> Callable:
             return and_gate(np.array([s1, s2]))
 
         return xor_gate
-    raise Exception('gate_type should be one of the next. "and", "nand", "or", "nor", "xor".')
+    raise Exception('gate_type should be one of the next. ["and", "nand", "or", "nor", "xor"]')
