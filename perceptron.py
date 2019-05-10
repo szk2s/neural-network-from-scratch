@@ -13,7 +13,7 @@ def make_perceptron(w: np.array, bias: float) -> Callable:
     return perceptron
 
 
-def make_gate(gate_type: str) -> Callable:
+def make_logic_gate(gate_type: str) -> Callable:
     if gate_type == 'and':
         return make_perceptron(np.array([0.5, 0.5]), -0.75)
     if gate_type == 'nand':
@@ -23,14 +23,16 @@ def make_gate(gate_type: str) -> Callable:
     if gate_type == 'nor':
         return make_perceptron(np.array([-0.5, -0.5]), 0.25)
     if gate_type == 'xor':
-        and_gate = make_gate('and')
-        nand_gate = make_gate('nand')
-        or_gate = make_gate('or')
-
         def xor_gate(x: np.array):
+            and_gate = make_logic_gate('and')
+            nand_gate = make_logic_gate('nand')
+            or_gate = make_logic_gate('or')
+
             s1 = nand_gate(x)
             s2 = or_gate(x)
-            return and_gate(np.array([s1, s2]))
+            output = and_gate(np.array([s1, s2]))
+            return output
 
         return xor_gate
+
     raise Exception('gate_type should be one of the next. ["and", "nand", "or", "nor", "xor"]')
