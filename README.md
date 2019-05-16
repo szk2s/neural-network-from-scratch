@@ -22,5 +22,5 @@ pip install -r requirements.txt
 ```
 ### To run test
 ```shell
-py.test
+py.test -m 'not graph'
 ```
