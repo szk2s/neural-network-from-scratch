@@ -1,5 +1,5 @@
 from .context import make_logic_gate
-from .helpers import export_graph
+from .helpers import export_heatmap
 from pytest import mark
 import numpy as np
 
@@ -77,7 +77,7 @@ def export_domain_graph(gate_type: str):
     it = np.nditer(y, flags=['multi_index'])
     while not it.finished:
         idx = it.multi_index
-        print("%s %s" % idx, end=' ')
+        # print("%s %s" % idx, end=' ')
         y[idx] = logic_gate(np.array([x1[idx], x2[idx]]))
         it.iternext()
 
@@ -88,4 +88,4 @@ def export_domain_graph(gate_type: str):
     y[200, 300] = 2
     y[300, 200] = 2
     y[300, 300] = 2
-    export_graph(y, gate_type + '_y')
+    export_heatmap(y, gate_type + '_y')
